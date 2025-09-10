@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h1>Predict the likelihood of diabetes</h1>
+  <p>Enter your information below. Fields left blank will use sensible defaults.</p>
+  <form method="POST" action="{{ url_for('predict') }}" class="grid">
+    {% for name, type, minv, maxv, default, placeholder in fields %}
+      <div class="field">
+        <label for="{{ name }}">{{ name }}</label>
+        <input
+          id="{{ name }}"
+          name="{{ name }}"
+          type="{{ type }}"
+          min="{{ minv }}"
+          max="{{ maxv }}"
+          step="any"
+          placeholder="{{ placeholder }}"
+        />
+        <small class="hint">Default: {{ default }}</small>
+      </div>
+    {% endfor %}
+    <div class="actions">
+      <button type="submit" class="btn">Predict</button>
+      <button type="reset" class="btn btn-secondary">Clear</button>
+    </div>
+  </form>
+</section>
+
+<section class="card subtle">
+  <h2>What do these fields mean?</h2>
+  <ul>
+    <li><strong>Glucose:</strong> Plasma glucose concentration (mg/dL)</li>
+    <li><strong>BloodPressure:</strong> Diastolic blood pressure (mm Hg)</li>
+    <li><strong>SkinThickness:</strong> Triceps skin fold thickness (mm)</li>
+    <li><strong>Insulin:</strong> 2-Hour serum insulin (mu U/ml)</li>
+    <li><strong>BMI:</strong> Body Mass Index (kg/m²)</li>
+    <li><strong>DiabetesPedigreeFunction:</strong> Diabetes heredity indicator</li>
+    <li><strong>Age:</strong> Age in years</li>
+  </ul>
+</section>
+{% endblock %}
